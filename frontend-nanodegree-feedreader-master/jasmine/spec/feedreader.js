@@ -42,7 +42,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-        it('has a name defined and that the URL is not empty', function(){
+        it('has a name defined and that the Name is not empty', function(){
             for(let feed of allFeeds){
                 expect(feed.name).toBeDefined();
                 expect(feed.url.name).not.toBe(0);
@@ -64,7 +64,11 @@ $(function() {
             menu.click();
             expect(body.classList.contains('menu-hidden')).toBe(false);
         });
+        it('hdies when the menu clicked again', function(){
+            const body = document.querySelector('body');
 
+            expect(body.classList.contains('menu-hidden')).toBe(false);
+        });
     });
 
         /* TODO: Write a test that ensures the menu element is
@@ -81,9 +85,9 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function(){
-        beforEach(function(done){
+        beforeEach(function(done){
             loadFeed(0,done);
-            
+
         });
         it('complete work', function(){
             const feed = document.querySelector('.feed');
@@ -100,9 +104,14 @@ $(function() {
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function(){
-        beforEach(function(done){
-            loadFeed(0);
-            loadFeed(1,done);
+        let initFeed;
+
+        beforeEach(function(done){
+            loadFeed(0, function(){
+                initFeed = document.querySelector('.feed').textContent;
+                loadFeed(1, done);
+            });
+            //loadFeed(1,done);
         });
     });
         /* TODO: Write a test that ensures when a new feed is loaded
