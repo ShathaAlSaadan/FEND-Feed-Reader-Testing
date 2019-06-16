@@ -55,7 +55,7 @@ $(function() {
     describe('menu', function(){
         it('is hidden', function(){
             const body = document.querySelector('body');
-            expect(body.classList.contains('menu-hidden')).toBe(true);
+            expect(body.classList.contains('menu-hidden')).toBe(false);
         });
 
         it('menu visibility', function(){
@@ -67,7 +67,7 @@ $(function() {
         it('hdies when the menu clicked again', function(){
             const body = document.querySelector('body');
 
-            expect(body.classList.contains('menu-hidden')).toBe(false);
+            expect(body.classList.contains('menu-hidden')).toBe(true);
         });
     });
 
@@ -104,14 +104,20 @@ $(function() {
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function(){
-        let initFeed;
+        let firstFeed;
+
 
         beforeEach(function(done){
             loadFeed(0, function(){
-                initFeed = document.querySelector('.feed').textContent;
+                firstFeed = document.querySelector('.feed').textContent;
                 loadFeed(1, done);
             });
             //loadFeed(1,done);
+        });
+        it('the diffrent', function(done){
+            let secondFeed = document.querySelector('.feed').textContent;
+            expect(secondFeed).not.toEqual(firstFeed);
+            done();
         });
     });
         /* TODO: Write a test that ensures when a new feed is loaded
